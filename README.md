@@ -1,4 +1,4 @@
-# CV Builder
+# Sumeio
 
 Web pembuat CV ATS-friendly yang gratis, dalam Bahasa Indonesia atau Inggris. Tanpa login dan tanpa backend: data tersimpan di browser pengguna, dan PDF dibuat di browser.
 

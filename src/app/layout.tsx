@@ -12,7 +12,7 @@ const instrument = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "CV Builder | Buat CV ATS-friendly gratis",
+  title: "Sumeio | Buat CV ATS-friendly gratis",
   description: "Buat CV ATS-friendly gratis dalam Bahasa Indonesia atau Inggris, dengan live preview dan unduh PDF. Tanpa daftar akun.",
 };
 

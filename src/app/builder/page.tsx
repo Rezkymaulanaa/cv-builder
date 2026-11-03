@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { BuilderScreen } from "@/components/BuilderScreen";
 
 export const metadata: Metadata = {
-  title: "Editor CV | CV Builder",
+  title: "Editor CV | Sumeio",
   robots: { index: false },
 };
 
