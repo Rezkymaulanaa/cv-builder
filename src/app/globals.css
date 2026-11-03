@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* Contrast is checked against WCAG 2.2 AA:
+   ink 18:1, muted 7.1:1, subtle 4.85:1 on canvas; white on primary 6.4:1;
+   field borders 3.2:1 against white (non-text UI needs 3:1). */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: var(--font-instrument), ui-serif, Georgia, "Times New Roman", serif;
+
+  --color-canvas: #f5f5f7;
+  --color-surface: #ffffff;
+  --color-ink: #0b0b0f;
+  --color-muted: #52525b;
+  --color-subtle: #6b6b74;
+  --color-line: #e4e4e7;
+  --color-field: #8e8e98;
+  --color-primary: #2b4de4;
+  --color-primary-hover: #2342c9;
+  --color-primary-soft: #eef1fe;
+  --color-success: #15803d;
+  --color-danger: #b42318;
+  --color-danger-soft: #fef3f2;
+  --color-warning-ink: #7a4a00;
+  --color-warning-soft: #fff7e6;
+
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.06);
+  --shadow-float: 0 12px 32px -8px rgb(16 24 40 / 0.14), 0 4px 8px -4px rgb(16 24 40 / 0.06);
+  --shadow-page: 0 24px 48px -16px rgb(16 24 40 / 0.18), 0 2px 6px rgb(16 24 40 / 0.06);
+
+  --animate-rise: rise 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A visible focus ring for keyboard users on every interactive element. */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-primary-soft);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@utility dotted {
+  background-image: radial-gradient(rgb(11 11 15 / 0.09) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* A utility rather than a component class so the button variants can @apply it. */
+@utility btn {
+  @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-medium whitespace-nowrap transition-[background-color,border-color,color,box-shadow,transform] duration-150 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-card;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+
+  .hint {
+    @apply mt-1.5 text-xs leading-relaxed text-subtle;
+  }
+
+  .input {
+    @apply block w-full rounded-xl border border-field bg-surface px-3.5 py-2.5 text-sm text-ink transition-colors placeholder:text-subtle hover:border-muted focus:border-primary focus:ring-4 focus:ring-primary/15 focus:outline-none aria-invalid:border-danger;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white shadow-[0_1px_2px_rgb(16_24_40/0.1),inset_0_1px_0_rgb(255_255_255/0.15)] hover:bg-primary-hover;
+  }
+
+  .btn-secondary {
+    @apply btn border border-line bg-surface text-ink shadow-card hover:border-field hover:bg-canvas;
+  }
+
+  .btn-soft {
+    @apply btn bg-ink/[0.05] text-ink hover:bg-ink/[0.09];
+  }
+
+  .btn-ghost {
+    @apply btn min-h-9 px-2.5 text-muted hover:bg-ink/[0.05] hover:text-ink;
+  }
+
+  .btn-icon {
+    @apply btn size-9 min-h-9 p-0 text-muted hover:bg-ink/[0.06] hover:text-ink;
+  }
+
+  .chip {
+    @apply inline-flex min-h-9 items-center gap-2 rounded-full border border-line bg-surface px-3.5 text-sm text-muted transition-colors hover:border-field hover:text-ink;
+  }
+
+  .chip-active {
+    @apply border-ink bg-ink text-white hover:border-ink hover:text-white;
+  }
+
+  .radio-card {
+    @apply flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-2 text-sm text-ink transition-colors hover:border-field has-checked:border-primary has-checked:bg-primary-soft;
+  }
+}
